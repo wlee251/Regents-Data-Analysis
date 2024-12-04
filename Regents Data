@@ -1,0 +1,110 @@
+// pages/index.js
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+export default function Dashboard() {
+  const regentsData = [
+    {
+      subject: 'US History',
+      'General Education': 6.25,
+      'ENL': 12.5,
+      'SPED': 67,
+      'Overall': 31
+    },
+    {
+      subject: 'Global',
+      'General Education': 66.6,
+      'ENL': 57.6,
+      'SPED': 25,
+      'Overall': 57
+    },
+    {
+      subject: 'Living Environment',
+      'General Education': 57,
+      'ENL': 12.5,
+      'SPED': 17,
+      'Overall': 21
+    },
+    {
+      subject: 'Algebra',
+      'General Education': 50,
+      'ENL': 65,
+      'SPED': 0,
+      'Overall': 58
+    },
+    {
+      subject: 'English',
+      'General Education': 77,
+      'ENL': 22,
+      'SPED': 0,
+      'Overall': 42
+    }
+  ];
+
+  const graduationData = [
+    {
+      metric: 'Regents Diploma',
+      percentage: 98
+    },
+    {
+      metric: 'AP Class Participation',
+      percentage: 91
+    },
+    {
+      metric: 'College Class Participation',
+      percentage: 21
+    },
+    {
+      metric: 'IEP Students with Regents',
+      percentage: 100
+    },
+    {
+      metric: 'MLL Students with Regents',
+      percentage: 100
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Educational Performance Dashboard 2024</h1>
+        </div>
+        
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-4">Regents Passing Rates by Subject and Student Category</h2>
+          <div className="h-96">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={regentsData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="subject" />
+                <YAxis label={{ value: 'Passing Rate (%)', angle: -90, position: 'insideLeft' }} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="General Education" fill="#2563eb" />
+                <Bar dataKey="ENL" fill="#7c3aed" />
+                <Bar dataKey="SPED" fill="#059669" />
+                <Bar dataKey="Overall" fill="#6b7280" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">2024 Graduation Cohort Achievements</h2>
+          <div className="h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={graduationData} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" domain={[0, 100]} />
+                <YAxis type="category" dataKey="metric" width={200} />
+                <Tooltip />
+                <Bar dataKey="percentage" fill="#2563eb" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
